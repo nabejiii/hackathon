@@ -2,8 +2,6 @@ package controller
 
 import (
 	"encoding/json"
-	"hackathon/dao"
-	"hackathon/model"
 	"hackathon/usecase"
 	"log"
 	"net/http"
@@ -21,18 +19,17 @@ func ContributionHandler(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		point := dao.GetPointSum(w, UserId)
-		ReceivedCons := usecase.GetReceivedCons(w, UserId)
-		SentCons := usecase.GetSentCons(w, UserId)
-		Response := model.ConsResForHTTPGet{Point: point, ReceivedCons: ReceivedCons, SentCons: SentCons}
-		bytes, err := json.Marshal(Response)
-		if err != nil {
-			log.Printf("fail: json.Marshal, %v\n", err)
+		Response, ServerErr := usecase.ResForHTTPGet(UserId)
+		bytes, ServerErr := json.Marshal(Response)
+		if ServerErr != nil {
+			log.Printf("fail: json.Marshal, %v\n", ServerErr)
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(bytes)
+		w.WriteHeader(http.StatusOK)
+		return
 
 	case http.MethodPost:
 
