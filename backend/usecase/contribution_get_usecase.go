@@ -5,10 +5,24 @@ import (
 	"hackathon/model"
 )
 
-func ResForHTTPGet(UserId string) (model.ConsResForHTTPGet, error) {
+func GetRecCons(UserId string) (int, []model.Con, error) {
 	point, ServerErr := dao.GetPointSum(UserId)
+	if ServerErr != nil {
+		return -1, nil, ServerErr
+	}
+
 	ReceivedCons, ServerErr := dao.GetReceivedCons(UserId)
-	SentCons, _ := dao.GetSentCons(UserId)
-	Response := model.ConsResForHTTPGet{Point: point, ReceivedCons: ReceivedCons, SentCons: SentCons}
-	return Response, ServerErr
+	if ServerErr != nil {
+		return -1, nil, ServerErr
+	}
+
+	return point, ReceivedCons, ServerErr
+}
+
+func GetSentCons(UserId string) ([]model.Con, error) {
+	SentCons, ServerErr := dao.GetSentCons(UserId)
+	if ServerErr != nil {
+		return nil, ServerErr
+	}
+	return SentCons, ServerErr
 }

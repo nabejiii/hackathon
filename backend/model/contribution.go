@@ -1,23 +1,21 @@
 package model
 
-type ReceivedCon struct {
-	ConId    string `json:"con_id"`
-	Time     string `json:"time"`
-	SenderId string `json:"sender_id"`
-	Point    int    `json:"point"`
-	Message  string `json:"message"`
+import "time"
+
+type Con struct {
+	ConId    string    `json:"con_id"`
+	Time     time.Time `json:"time"`
+	Sender   User      `json:"sender"`
+	Receiver User      `json:"receiver"`
+	Point    int       `json:"point"`
+	Message  string    `json:"message"`
 }
 
-type SentCon struct {
-	ConId      string `json:"con_id"`
-	Time       string `json:"time"`
-	ReceiverId string `json:"receiver_id"`
-	Point      int    `json:"point"`
-	Message    string `json:"message"`
+type RecConsResForHTTPGet struct {
+	Point        int   `json:"point"`
+	ReceivedCons []Con `json:"received_cons"`
 }
 
-type ConsResForHTTPGet struct {
-	Point        int           `json:"point"`
-	ReceivedCons []ReceivedCon `json:"received_cons"`
-	SentCons     []SentCon     `json:"sent_cons"`
+type SentConsResForHTTPGet struct {
+	SentCons []Con `json:"sent_cons"`
 }

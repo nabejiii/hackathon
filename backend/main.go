@@ -9,7 +9,9 @@ import (
 
 func main() {
 	http.HandleFunc("/login", controller.LoginHandler)
-	http.HandleFunc("/user", controller.ContributionHandler)
+	http.HandleFunc("/signup", controller.SignUpHandler)
+	http.HandleFunc("/home", controller.RecConHandler)
+	http.HandleFunc("/user", controller.UserInfoHandler)
 
 	dao.CloseDBWithSysCall()
 

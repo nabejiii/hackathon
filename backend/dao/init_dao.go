@@ -14,7 +14,7 @@ var db *sql.DB
 func init() {
 	mysqlUser := "test_user"
 	mysqlUserPwd := "password"
-	mysqlDatabase := "test_database"
+	mysqlDatabase := "test_database?parseTime=true"
 
 	_db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@(localhost:3306)/%s", mysqlUser, mysqlUserPwd, mysqlDatabase))
 	if err != nil {
