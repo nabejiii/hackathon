@@ -19,77 +19,25 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { ListItems } from '../listItems';
-//import Chart from './Chart';
-//import Points from './Points';
-//import RecConsTable from './RecConsTable';
+import SentConsTable from './SentConsTable';
 import Copyright from '../../SignIn/Copyright'
-//import {Con} from './Con'
-//import { FetchRecCons } from './fetchRecCons';
+import {Con} from '../Con'
+import { FetchSentCons } from './FetchSentCons';
 import { UserContext } from '../../UserProvider';
 import UserPageDrawer from '../Drawer'
 import UserPageAppBar from '../AppBar'
-
-
-const drawerWidth: number = 240;
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    '& .MuiDrawer-paper': {
-      position: 'relative',
-      whiteSpace: 'nowrap',
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      boxSizing: 'border-box',
-      ...(!open && {
-        overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        width: theme.spacing(7),
-        [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9),
-        },
-      }),
-    },
-  }),
-);
+import { SendConForm } from './SendConForm';
+import { UserDemo } from '../../SignIn/User';
 
 const mdTheme = createTheme();
 
 function SendPageContent() {
   const [open, setOpen] = React.useState(false);
-  const [point, setPoint] = React.useState<Number>(0);
-  {/*const [RecCons, setRecCons] = React.useState<Con[]>([])
+  const [SentCons, setSentCons] = React.useState<Con[]>([])
   const {loginUser, setLoginUser} = React.useContext(UserContext);
   React.useEffect(() => {
-    FetchRecCons(loginUser,setPoint,setRecCons)
-  },[]);*/}
+    FetchSentCons(loginUser,setSentCons)
+  },[]);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -113,35 +61,14 @@ function SendPageContent() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  {/*<Chart />*/}
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  {/*<Points point={point}/>*/}
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  {/*<RecConsTable RecCons={RecCons} />*/}
+                  <SendConForm/>
+                </Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                  <SentConsTable SentCons={SentCons} />
                 </Paper>
               </Grid>
             </Grid>

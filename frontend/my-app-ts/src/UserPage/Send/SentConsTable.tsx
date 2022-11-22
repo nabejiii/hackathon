@@ -13,33 +13,33 @@ function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-type RecConsTableProps = {
-  RecCons :Con[]
+type SentConsTableProps = {
+  SentCons :Con[]
 }
 
-export default function RecConsTable(props: RecConsTableProps) {
+export default function SendConsTable(props: SentConsTableProps) {
   return (
     <React.Fragment>
-      <Title>受け取ったCons</Title>
+      <Title>送ったCons</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>日付</TableCell>
-            <TableCell>送信者</TableCell>
+            <TableCell>送った相手</TableCell>
             <TableCell align="center">Con Point</TableCell>
             <TableCell>メッセージ</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.RecCons.map((Con) => (
+          {props.SentCons.map((Con) => (
             <TableRow key={Con.con_id}>
-              <TableCell>{Con.time.getMonth() + "/" + Con.time.getDay()}</TableCell>
+              <TableCell>{Con.time.toString()}</TableCell>
               <TableCell>{Con.sender.first_name + ' ' + Con.sender.last_name}</TableCell>
               <TableCell align="center">{Con.point.toString()}</TableCell>
               <TableCell>{Con.message}</TableCell>
             </TableRow>
           ))}
-        </TableBody>
+          </TableBody>
       </Table>
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
         See more orders

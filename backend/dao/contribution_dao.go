@@ -88,13 +88,30 @@ func GetSentCons(UserId string) ([]model.Con, error) {
 	return SentCons, err
 }
 
+func SendCon(con model.Con) error {
+	tx, err := db.Begin()
+	if err != nil {
+		log.Printf("fail: db.Begin, %v\n", err)
+		return err
+	}
+	_, err = db.Query("INSERT INTO contributions(con_id, time, sender_id, receiver_id, point, message) VALUES (?, ?, ?, ?, ?, ?) ", con.ConId, con.Time, con.Sender.UserId, con.Receiver.UserId, con.Point, con.Message)
+	if err != nil {
+		tx.Rollback()
+		log.Printf("fail: db.Query, %v\n", err)
+		return err
+	} else {
+		tx.Commit()
+	}
+	return err
+}
+
 func UpdateCon(con model.Con) error {
 	tx, err := db.Begin()
 	if err != nil {
 		log.Printf("fail: db.Begin, %v\n", err)
 		return err
 	}
-	_, err = db.Query("UPDATE contributions SET point = ?, message = ? WHERE con_id = ? AND sender_id = ?", con.Point, con.Message, con.ConId, con.Sender.UserId)
+	_, err = db.Query("UPDATE contributions SET point = ?, message = ? WHERE con_id = ?", con.Point, con.Message, con.ConId)
 	if err != nil {
 		tx.Rollback()
 		log.Printf("fail: db.Query, %v\n", err)

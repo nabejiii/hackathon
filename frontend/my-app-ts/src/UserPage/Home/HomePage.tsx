@@ -23,8 +23,8 @@ import Chart from './Chart';
 import Points from './Points';
 import RecConsTable from './RecConsTable';
 import Copyright from '../../SignIn/Copyright'
-import {Con} from './Con'
-import { FetchRecCons } from './fetchRecCons';
+import {Con} from '../Con'
+import { FetchRecCons } from './FetchRecCons';
 import { UserContext } from '../../UserProvider';
 import UserPageDrawer from '../Drawer'
 import UserPageAppBar from '../AppBar'

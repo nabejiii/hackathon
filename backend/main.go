@@ -12,7 +12,7 @@ func main() {
 	http.HandleFunc("/signup", controller.SignUpHandler)
 	http.HandleFunc("/home", controller.RecConHandler)
 	http.HandleFunc("/user", controller.UserInfoHandler)
-
+	http.HandleFunc("/send", controller.SendConHandler)
 	dao.CloseDBWithSysCall()
 
 	log.Println("Listening...")

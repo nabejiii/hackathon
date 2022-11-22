@@ -13,7 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from '../SignIn/Copyright';
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
-import SignIn from '../SignIn/SignIn'
+import SignIn from '../SignIn/Login'
 import axios from 'axios';
 
 
@@ -24,19 +24,24 @@ export default function SignUp() {
   const HandleSubmitUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (!data.get('firstName')) {
+    const firstName = data.get('firstName')
+    const lastName = data.get('lastName')
+    if (!firstName) {
         alert("Please enter first name");
         return;
-    } else if (!data.get('lastName')) {
+    } else if (!lastName) {
         alert("Please enter last name");
         return;
+    } else if (firstName.toString().length >25) {
+      //ibuki白目剥いて寝てた/////////////////////////////////////////////////////
     }
     await axios.post('http://localhost:8000/signup', {first_name: data.get('firstName'), last_name: data.get('lastName')})
     .then(() => {
         navigate('/login');
     })
-    .catch((err) => {throw Error(`Failed to fetch users: ${err}`)});
+    .catch((err) => {throw Error(`Failed to sign up: ${err}`)});
   };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -90,7 +95,7 @@ export default function SignUp() {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/login">
-                  Already have an account? Sign in
+                  既にアカウントをお持ちですか？ ログイン
                 </Link>
                 <Routes><Route path="login" element={<SignIn />} /></Routes>
               </Grid>
