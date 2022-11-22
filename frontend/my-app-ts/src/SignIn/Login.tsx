@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import UserDialog from './UserDialog'
+import UserDialog from './LoginUserDialog'
 
 import Copyright from './Copyright'
 import Logo from './Logo'

@@ -43,35 +43,6 @@ func RecConHandler(w http.ResponseWriter, r *http.Request) {
 	case http.MethodGet:
 		GetRecCons(w, UserId)
 
-	case http.MethodPut:
-		var con model.Con
-		con.Sender.UserId = UserId
-		RequestErr := json.NewDecoder(r.Body).Decode(&con)
-		if RequestErr != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			return
-		}
-		ServerErr := usecase.UpdateCon(con)
-		if ServerErr != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-		GetRecCons(w, UserId)
-
-	case http.MethodDelete:
-		var con model.Con
-		RequestErr := json.NewDecoder(r.Body).Decode(&con)
-		if RequestErr != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			return
-		}
-		ServerErr := usecase.DeleteCon(con.ConId)
-		if ServerErr != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-		GetRecCons(w, UserId)
-
 	case http.MethodOptions:
 		return
 	default:
