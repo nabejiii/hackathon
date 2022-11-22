@@ -3,7 +3,7 @@ import {Con, toTimeCons} from '../Con';
 import { User } from '../../SignIn/User';
 
 
-export const FetchRecCons = async (loginUser: User,setPoint :(arg0: Number)=>void, setRecCons:(arg0 :Con[])=>void) => {
+export const fetchRecCons = async (loginUser: User,setPoint :(arg0: Number)=>void, setRecCons:(arg0 :Con[])=>void) => {
     await axios
     .get("http://localhost:8000/home?user_id=" + loginUser.user_id)
     .then((response :any) => {

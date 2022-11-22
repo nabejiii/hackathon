@@ -24,7 +24,7 @@ import Points from './Points';
 import RecConsTable from './RecConsTable';
 import Copyright from '../../SignIn/Copyright'
 import {Con} from '../Con'
-import { FetchRecCons } from './FetchRecCons';
+import { fetchRecCons } from './fetchRecCons';
 import { UserContext } from '../../UserProvider';
 import UserPageDrawer from '../Drawer'
 import UserPageAppBar from '../AppBar'
@@ -38,7 +38,7 @@ function DashboardContent() {
   const [RecCons, setRecCons] = React.useState<Con[]>([])
   const {loginUser, setLoginUser} = React.useContext(UserContext);
   React.useEffect(() => {
-    FetchRecCons(loginUser,setPoint,setRecCons)
+    fetchRecCons(loginUser,setPoint,setRecCons)
   },[]);
 
   return (
