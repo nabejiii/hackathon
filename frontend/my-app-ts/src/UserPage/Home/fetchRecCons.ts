@@ -1,6 +1,7 @@
 import axios from 'axios';
-import {Con, StrCon, toTimeCons} from '../Con';
+import {Con, toTimeCons} from '../Con';
 import { User } from '../../SignIn/User';
+
 
 export const FetchRecCons = async (loginUser: User,setPoint :(arg0: Number)=>void, setRecCons:(arg0 :Con[])=>void) => {
     await axios
