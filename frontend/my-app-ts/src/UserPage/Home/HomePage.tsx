@@ -30,7 +30,6 @@ import UserPageDrawer from '../Drawer'
 import UserPageAppBar from '../AppBar'
 
 
-
 const mdTheme = createTheme();
 
 function DashboardContent() {
