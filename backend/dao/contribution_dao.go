@@ -16,7 +16,7 @@ func GetPointSum(UserId string) (int, error) {
 }
 
 func GetReceivedCons(UserId string) ([]model.Con, error) {
-	rows, err := db.Query("SELECT con_id, time, sender_id, point, message FROM contributions WHERE receiver_id = ?", UserId)
+	rows, err := db.Query("SELECT con_id, time, sender_id, point, message FROM contributions WHERE receiver_id = ? ORDER BY time DESC", UserId)
 	if err != nil {
 		log.Printf("fail: db.Query, %v\n", err)
 		return nil, err
@@ -51,7 +51,7 @@ func GetReceivedCons(UserId string) ([]model.Con, error) {
 }
 
 func GetSentCons(UserId string) ([]model.Con, error) {
-	rows, err := db.Query("SELECT con_id, time, receiver_id, point, message FROM contributions WHERE sender_id = ?", UserId)
+	rows, err := db.Query("SELECT con_id, time, receiver_id, point, message FROM contributions WHERE sender_id = ? ORDER BY time DESC", UserId)
 	if err != nil {
 		log.Printf("fail: db.Query, %v\n", err)
 		return nil, err

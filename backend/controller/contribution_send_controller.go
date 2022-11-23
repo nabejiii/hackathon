@@ -23,7 +23,6 @@ func GetSentCons(w http.ResponseWriter, UserId string) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(bytes)
-	w.WriteHeader(http.StatusOK)
 	return
 }
 
@@ -42,6 +41,8 @@ func SendConHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		GetSentCons(w, UserId)
+		w.WriteHeader(http.StatusOK)
+		return
 
 	case http.MethodPost:
 		var con model.Con
@@ -60,6 +61,8 @@ func SendConHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		GetSentCons(w, UserId)
+		w.WriteHeader(http.StatusOK)
+		return
 
 	case http.MethodPut:
 		var con model.Con

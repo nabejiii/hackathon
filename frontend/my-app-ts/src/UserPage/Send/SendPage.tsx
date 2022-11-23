@@ -28,14 +28,19 @@ import UserPageDrawer from '../Drawer'
 import UserPageAppBar from '../AppBar'
 import { SendConForm } from './SendConForm';
 import { UserDemo } from '../../SignIn/User';
+import { useNavigate } from 'react-router-dom';
 
 const mdTheme = createTheme();
 
 function SendPageContent() {
   const [open, setOpen] = React.useState(false);
-  const [SentCons, setSentCons] = React.useState<Con[]>([])
+  const [sentCons, setSentCons] = React.useState<Con[]>([])
   const {loginUser, setLoginUser} = React.useContext(UserContext);
+  const navigate = useNavigate()
   React.useEffect(() => {
+    if (loginUser == UserDemo) {
+      navigate('/login');
+    }
     FetchSentCons(loginUser,setSentCons)
   },[]);
 
@@ -60,17 +65,8 @@ function SendPageContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <SendConForm/>
-                </Paper>
-              </Grid>
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <SentConsTable SentCons={SentCons} />
-                </Paper>
-              </Grid>
+              <SendConForm setSentCons={setSentCons}/>
+              <SentConsTable sentCons={sentCons} />
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
