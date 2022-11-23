@@ -10,12 +10,10 @@ func GetRecCons(UserId string) (int, []model.Con, error) {
 	if ServerErr != nil {
 		return -1, nil, ServerErr
 	}
-
 	ReceivedCons, ServerErr := dao.GetReceivedCons(UserId)
 	if ServerErr != nil {
 		return -1, nil, ServerErr
 	}
-
 	return point, ReceivedCons, ServerErr
 }
 
