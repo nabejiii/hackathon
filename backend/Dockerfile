@@ -12,6 +12,4 @@ COPY . ./
 
 RUN go build -o /hackathon-server
 
-EXPOSE 8080
-
 CMD [ "/hackathon-server" ]
