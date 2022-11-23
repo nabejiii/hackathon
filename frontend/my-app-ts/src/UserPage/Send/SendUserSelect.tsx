@@ -7,15 +7,15 @@ import { User, UserDemo } from '../../SignIn/User';
 
 type SendUserSelectProps = {
     users: User[]
-    sendUser: User
-    setSendUser: React.Dispatch<React.SetStateAction<User>>
+    receiveUser: User
+    setReceiveUser: React.Dispatch<React.SetStateAction<User>>
 }
 
 export default function SendUserSelect(props :SendUserSelectProps) {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedUser = props.users.find(user=>(user.user_id==event.target.value));
         if (typeof selectedUser != "undefined") {
-            props.setSendUser(selectedUser);
+            props.setReceiveUser(selectedUser);
         }
       };
     
@@ -25,14 +25,14 @@ export default function SendUserSelect(props :SendUserSelectProps) {
                 id="sendUser"
                 select
                 label="ユーザー選択"
-                value={props.sendUser.last_name + ' ' + props.sendUser.first_name}
+                value={props.receiveUser.user_id}
                 onChange={handleChange}
                 helperText="Conを送る相手を選んでください"
                 variant="standard"
                 size="medium"
-                >
+            >
                 {props.users.map((user) => (
-                    <MenuItem key={user.user_id} value={user.last_name + " " + user.first_name}>
+                    <MenuItem key={user.user_id} value={user.user_id}>
                         {user.last_name + " " + user.first_name}
                     </MenuItem>
                 ))}

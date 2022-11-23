@@ -33,8 +33,8 @@ export default function RecConsTable(props: RecConsTableProps) {
         <TableBody>
           {props.RecCons.map((Con) => (
             <TableRow key={Con.con_id}>
-              <TableCell>{Con.time.getMonth() + "/" + Con.time.getDay()}</TableCell>
-              <TableCell>{Con.sender.first_name + ' ' + Con.sender.last_name}</TableCell>
+              <TableCell>{Con.time.toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" })}</TableCell>{/*Con.time.getMonth() + "/" + Con.time.getDay()*/}
+              <TableCell>{Con.sender.last_name + ' ' + Con.sender.first_name}</TableCell>
               <TableCell align="center">{Con.point.toString()}</TableCell>
               <TableCell>{Con.message}</TableCell>
             </TableRow>

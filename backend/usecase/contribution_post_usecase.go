@@ -14,7 +14,7 @@ func SendCon(con *model.Con, UserId string) (error, error) {
 	con.ConId = ulid.Make().String()
 	con.Sender.UserId = UserId
 	if utf8.RuneCountInString(con.Message) > 100 {
-		RequestErr := errors.New("fail: lastname is invalid")
+		RequestErr := errors.New("fail: message is invalid")
 		return RequestErr, nil
 	}
 	ServerErr := dao.SendCon(*con)

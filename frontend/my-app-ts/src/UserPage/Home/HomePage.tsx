@@ -28,6 +28,8 @@ import { fetchRecCons } from './fetchRecCons';
 import { UserContext } from '../../UserProvider';
 import UserPageDrawer from '../Drawer'
 import UserPageAppBar from '../AppBar'
+import { UserDemo } from '../../SignIn/User';
+import { useNavigate } from 'react-router-dom';
 
 
 const mdTheme = createTheme();
@@ -37,7 +39,11 @@ function DashboardContent() {
   const [point, setPoint] = React.useState<Number>(0);
   const [RecCons, setRecCons] = React.useState<Con[]>([])
   const {loginUser, setLoginUser} = React.useContext(UserContext);
+  const navigate = useNavigate();
   React.useEffect(() => {
+    if (loginUser == UserDemo) {
+      navigate('/login');
+    }
     fetchRecCons(loginUser,setPoint,setRecCons)
   },[]);
 
