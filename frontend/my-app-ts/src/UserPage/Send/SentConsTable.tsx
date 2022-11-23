@@ -11,7 +11,6 @@ import Title from '../Title';
 import {Con} from '../Con';
 import { Button } from '@mui/material';
 
-
 function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
