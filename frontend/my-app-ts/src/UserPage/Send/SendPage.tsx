@@ -31,6 +31,7 @@ import { User, UserDemo } from '../../SignIn/User';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { theme } from '../../SignIn/Login';
+import { baseURL } from '../../App';
 
 
 function SendPageContent() {
@@ -41,7 +42,7 @@ function SendPageContent() {
   const [others, setOthers] = React.useState<User[]>([])
   const FetchOthers = async () => {
     await axios
-    .get("http://localhost:8080/login")
+    .get(baseURL + "/login")
     .then((response :any) => {setOthers(response.data.filter((user :User)=>(user.user_id != loginUser.user_id)))})
     .catch((err :Error) => {throw Error(`Failed to fetch others: ${err}`)})
   };

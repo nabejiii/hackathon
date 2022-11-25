@@ -1,11 +1,12 @@
 import axios from 'axios';
 import {Con, toTimeCons} from '../Con';
 import { User } from '../../SignIn/User';
+import { baseURL } from '../../App';
 
 
 export const FetchSentCons = async (loginUser: User, setSentCons:(arg0 :Con[])=>void) => {
     await axios
-    .get("http://localhost:8080/send?user_id=" + loginUser.user_id)
+    .get(baseURL + "/send?user_id=" + loginUser.user_id)
     .then((response :any) => {
         const sent_cons: Con[] = toTimeCons(response.data.sent_cons);
         if (sent_cons !== undefined) {

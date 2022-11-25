@@ -14,12 +14,13 @@ import Typography from '@mui/material/Typography';
 import { orange } from '@mui/material/colors';
 import {User, UserDemo, UserDialogProps} from './User';
 import Box from '@mui/material/Box';
+import { baseURL } from '../App';
 
 function UserDialogContents(props: UserDialogProps) {
     const [users,setUsers] = React.useState<User[]>([])
     const fetchUsers = async () => {
       await axios
-      .get("http://localhost:8080/login")
+      .get(baseURL + "/login")
       .then((response :any) => {setUsers(response.data)})
       .catch((err :Error) => {throw Error(`Failed to fetch users: ${err}`)})
     };

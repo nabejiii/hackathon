@@ -11,6 +11,7 @@ import { User, UserDemo } from "../../SignIn/User";
 import { UserContext } from '../../UserProvider';
 import Paper from '@mui/material/Paper';
 import { Con, toTimeCons } from "../Con";
+import { baseURL } from "../../App";
 
 const theme = createTheme();
 
@@ -38,7 +39,7 @@ export function SendConForm(props :SendConFormProps) {
         const pointornull = data.get('conPoint');
         if (pointornull != null) {
             const point :Number = +pointornull;
-            await axios.post("http://localhost:8080/send?user_id=" + loginUser.user_id, {sender: loginUser, receiver: receiveUser, point: point, message: data.get('message')})
+            await axios.post(baseURL + "/send?user_id=" + loginUser.user_id, {sender: loginUser, receiver: receiveUser, point: point, message: data.get('message')})
             .then((response :any) => {
                 const sent_cons: Con[] = toTimeCons(response.data.sent_cons);
                 if (sent_cons !== undefined) {
