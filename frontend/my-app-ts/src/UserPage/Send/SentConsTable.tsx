@@ -8,22 +8,25 @@ import TableRow from '@mui/material/TableRow';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Title from '../Title';
-import {Con} from '../Con';
-import { Button } from '@mui/material';
+import {Con, conDemo, editCon} from '../Con';
+import DeleteButton from './DeleteButton';
+import SentConContent from './SentConContent';
+import SentConEdit from './SentConEdit';
+import { User } from '../../SignIn/User';
 
 function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
 type SentConsTableProps = {
+  others :User[]
   sentCons :Con[]
+  setSentCons :React.Dispatch<React.SetStateAction<Con[]>>
 }
 
-export default function SendConsTable(props: SentConsTableProps) {
-  const handleDelete = () => {
-    const con_id = document.getElementById('button');
-    console.log(con_id);
-  }
+export default function SentConsTable(props: SentConsTableProps) {
+  const [editConId, setEditConId] = React.useState<string>('');
+
   return (
     <React.Fragment>
       <Grid item xs={12}>
@@ -36,23 +39,23 @@ export default function SendConsTable(props: SentConsTableProps) {
                 <TableCell>送った相手</TableCell>
                 <TableCell align="center">Con Point</TableCell>
                 <TableCell>メッセージ</TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {props.sentCons.map((con) => (
-                <TableRow key={con.con_id}>
-                  <TableCell>{con.time.toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" })}</TableCell>
-                  <TableCell>{con.receiver.last_name + ' ' + con.receiver.first_name}</TableCell>
-                  <TableCell align="center">{con.point.toString()}</TableCell>
-                  <TableCell>{con.message}</TableCell>
-                  <Button id={con.con_id} onClick={handleDelete}>削除</Button>
+                <>
+                <TableRow key={con.con_id} sx={{...(con.con_id == editConId && {display: 'none'})}}>
+                  <SentConContent con={con} setSentCons={props.setSentCons} setEditConId={setEditConId}/>
                 </TableRow>
+                <TableRow key={"edit" + con.con_id} sx={{...(!(con.con_id == editConId) && {display: 'none'})}}>
+                  <SentConEdit others={props.others} con={con} setSentCons={props.setSentCons} setEditConId={setEditConId}/>
+                </TableRow>
+                </>
               ))}
-              </TableBody>
+            </TableBody>
           </Table>
-          <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-            See more orders
-          </Link>
         </Paper>
       </Grid>
     </React.Fragment>

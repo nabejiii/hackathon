@@ -9,7 +9,6 @@ func GetPointSum(UserId string) (int, error) {
 	var p int
 	err := db.QueryRow("SELECT SUM(point) FROM contributions WHERE receiver_id = ?", UserId).Scan(&p)
 	if err != nil {
-		log.Printf("fail: db.Query, %v\n", err)
 		return 0, err
 	}
 	return p, err

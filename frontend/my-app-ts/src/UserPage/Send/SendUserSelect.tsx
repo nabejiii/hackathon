@@ -9,6 +9,8 @@ type SendUserSelectProps = {
     users: User[]
     receiveUser: User
     setReceiveUser: React.Dispatch<React.SetStateAction<User>>
+    helperText :string
+    size :"small" | "medium" | undefined
 }
 
 export default function SendUserSelect(props :SendUserSelectProps) {
@@ -27,9 +29,9 @@ export default function SendUserSelect(props :SendUserSelectProps) {
                 label="ユーザー選択"
                 value={props.receiveUser.user_id}
                 onChange={handleChange}
-                helperText="Conを送る相手を選んでください"
+                helperText={props.helperText}
                 variant="standard"
-                size="medium"
+                size={props.size}
             >
                 {props.users.map((user) => (
                     <MenuItem key={user.user_id} value={user.user_id}>

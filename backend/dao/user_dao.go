@@ -72,3 +72,29 @@ func GetUserInfo(UserId string) (model.User, error) {
 	}
 	return user, err
 }
+
+func GetMembers() ([]model.Member, error) {
+	rows, ServerErr := db.Query("SELECT user_id, first_name, last_name FROM users")
+	if ServerErr != nil {
+		log.Printf("fail: db.Query, %v\n", ServerErr)
+		return nil, ServerErr
+	}
+	members := make([]model.Member, 0)
+	for rows.Next() {
+		var m model.Member
+		if err := rows.Scan(&m.UserId, &m.FirstName, &m.LastName); err != nil {
+			log.Printf("fail: rows.Scan, %v\n", err)
+
+			if err := rows.Close(); err != nil {
+				log.Printf("fail: rows.Close(), %v\n", err)
+			}
+			return nil, err
+		}
+		err := db.QueryRow("SELECT SUM(point) FROM contributions WHERE receiver_id = ?", m.UserId).Scan(&m.Point)
+		if err != nil {
+			m.Point = 0
+		}
+		members = append(members, m)
+	}
+	return members, ServerErr
+}

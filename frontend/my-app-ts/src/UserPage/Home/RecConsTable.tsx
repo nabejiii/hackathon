@@ -8,11 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import Title from '../Title';
 import {Con} from '../Con';
 
-
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
-
 type RecConsTableProps = {
   RecCons :Con[]
 }
@@ -41,9 +36,6 @@ export default function RecConsTable(props: RecConsTableProps) {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
-      </Link>
     </React.Fragment>
   );
 }

@@ -13,12 +13,13 @@ import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { orange } from '@mui/material/colors';
 import {User, UserDemo, UserDialogProps} from './User';
+import Box from '@mui/material/Box';
 
 function UserDialogContents(props: UserDialogProps) {
     const [users,setUsers] = React.useState<User[]>([])
     const fetchUsers = async () => {
       await axios
-      .get("http://localhost:8000/login")
+      .get("http://localhost:8080/login")
       .then((response :any) => {setUsers(response.data)})
       .catch((err :Error) => {throw Error(`Failed to fetch users: ${err}`)})
     };
@@ -85,12 +86,25 @@ export default function SimpleDialogDemo(props :SimpleDialogDemoProps) {
 
   return (
     <div>
-      <Typography variant="subtitle1" component="div">
-        Selected User : {selectedUser.long_name}
+      <Typography variant="subtitle1" component="div" fontSize={25}>
+        Con !!
+      </Typography>
+      <Box sx={{
+            mt: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+      }}>
+        <Avatar sx={{ bgcolor: orange[100], color: orange[600] }}>
+          <PersonIcon />
+        </Avatar>
+      </Box>
+      <Typography variant="subtitle1" component="div" fontSize={20} m={2}>
+        {selectedUser.long_name}
       </Typography>
       <br />
       <Button variant="outlined" onClick={handleClickOpen}>
-        Select User
+        ユーザー選択
       </Button>
       <UserDialogContents
         selectedUser={selectedUser}

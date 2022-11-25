@@ -78,6 +78,8 @@ func SendConHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		GetSentCons(w, UserId)
+		w.WriteHeader(http.StatusOK)
+		return
 
 	case http.MethodDelete:
 		var con model.Con
@@ -92,6 +94,8 @@ func SendConHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		GetSentCons(w, UserId)
+		w.WriteHeader(http.StatusOK)
+		return
 
 	case http.MethodOptions:
 		return
