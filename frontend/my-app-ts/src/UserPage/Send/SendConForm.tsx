@@ -26,13 +26,13 @@ export function SendConForm(props :SendConFormProps) {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         if (!data.get('conPoint')) {
-            alert("Please enter conPoint");
+            alert("conPointを入力してください");
             return;
         } else if (!data.get('message')) {
-            alert("Please enter message");
+            alert("メッセージを入力してください");
             return;
         } else if (!receiveUser) {
-            alert("Please select User");
+            alert("送る相手を選択してください");
             return;
         }
         const pointornull = data.get('conPoint');
@@ -63,6 +63,7 @@ export function SendConForm(props :SendConFormProps) {
                                 receiveUser={receiveUser}
                                 setReceiveUser={setReceiveUser}
                                 helperText={"Conを送る相手を選んでください"}
+                                size={"medium"}
                             />
                             <Grid item xs={12} sm={6}>
                                 <TextField

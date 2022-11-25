@@ -35,7 +35,6 @@ export default function SentConEdit(props: SentConEditProps) {
                 props.setSentCons(sent_cons);
             }
             props.setEditConId("");
-            console.log(message);
         })
         .catch((err) => {throw Error(`Failed to post con: ${err}`)});
     };
@@ -52,6 +51,7 @@ export default function SentConEdit(props: SentConEditProps) {
                                 receiveUser={receiver}
                                 setReceiveUser={setReciver}
                                 helperText={''}
+                                size={"small"}
                 />
             </TableCell>
             <TableCell align="center">
@@ -66,6 +66,7 @@ export default function SentConEdit(props: SentConEditProps) {
                         shrink: true,
                     }}
                     variant="standard"
+                    size="small"
                 />
             </TableCell>
             <TableCell>
@@ -77,6 +78,7 @@ export default function SentConEdit(props: SentConEditProps) {
                     id="message" 
                     label="メッセージ" 
                     variant="standard" 
+                    size="small"
                 />
             </TableCell>
             <TableCell>

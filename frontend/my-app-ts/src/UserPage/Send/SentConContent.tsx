@@ -22,7 +22,7 @@ export default function SentConContent(props: SentConContentProps) {
             <TableCell align="center">{props.con.point.toString()}</TableCell>
             <TableCell>{props.con.message}</TableCell>
             <TableCell><Button onClick={handleClick}>編集</Button></TableCell>
-            <TableCell><DeleteButton con_id={props.con.con_id} setSentCons={props.setSentCons}/></TableCell>
+            <DeleteButton con_id={props.con.con_id} setSentCons={props.setSentCons}/>
         </>
     )
 }

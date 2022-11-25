@@ -5,23 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="132cd447-3472-4646-81c6-5d825d9cba5f" name="変更" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/contribution_send_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contribution_send_controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/contribution_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/dao/contribution_dao.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/init_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/dao/init_dao.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/user_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/dao/user_dao.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/SignIn/LoginUserDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/SignIn/LoginUserDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/SignUp/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/SignUp/SignUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Con.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Con.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Home/fetchRecCons.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Home/fetchRecCons.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/FetchSentCons.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/FetchSentCons.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/AppBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/AppBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/DeleteButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/DeleteButton.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SendConForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SendConForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SendPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SendPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SendUserSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SendUserSelect.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConEdit.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,21 +40,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "go.import.settings.migrated": "true",
-    "last_opened_file_path": "/Users/watanabekenta"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/watanabekenta&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="go build hackathon" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="backend" />
