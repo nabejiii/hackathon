@@ -58,14 +58,14 @@ export default function SignUp() {
             Sign up
           </Typography>
           <Box sx={{ mt: 10 }}>
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   name="lastName"
                   required
                   fullWidth
                   error={lastName.length > 25}
-                  helperText={lastName.length > 25 && ("25文字以内で入力してください")}
+                  helperText={lastName.length > 25 && ("25字以内で入力してください")}
                   value={lastName}
                   onChange={(event) => setLastName(event.target.value)}
                   id="lastName"
@@ -83,7 +83,7 @@ export default function SignUp() {
                   id="firstName"
                   label="名"
                   name="firstName"
-                  helperText={firstName.length > 25 && ("25文字以内で入力してください")}
+                  helperText={firstName.length > 25 && ("25字以内で入力してください")}
                 />
               </Grid>
             </Grid>
