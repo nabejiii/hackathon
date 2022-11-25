@@ -19,10 +19,6 @@ export type StrCon = {
     message :string;
 }
 
-export type editCon = Con & {
-    edit :boolean
-}
-
 export const conDemo :Con = {
     con_id : "",
     time : new Date("2021-05-23"),

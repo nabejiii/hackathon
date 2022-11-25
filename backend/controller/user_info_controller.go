@@ -30,24 +30,18 @@ func UserInfoHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	UserId := r.URL.Query().Get("user_id")
+	if UserId == "" {
+		log.Println("fail: user_id is empty")
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 	switch r.Method {
 	case http.MethodGet:
-		UserId := r.URL.Query().Get("user_id")
-		if UserId == "" {
-			log.Println("fail: user_id is empty")
-			w.WriteHeader(http.StatusBadRequest)
-			return
-		}
 		GetUserInfo(w, UserId)
 
 	case http.MethodPut:
 		var user model.User
-		user.UserId = r.URL.Query().Get("user_id")
-		if user.UserId == "" {
-			log.Println("fail: user_id is empty")
-			w.WriteHeader(http.StatusBadRequest)
-			return
-		}
 		RequestErr := json.NewDecoder(r.Body).Decode(&user)
 		if RequestErr != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -58,7 +52,21 @@ func UserInfoHandler(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		GetUserInfo(w, user.UserId)
+		w.WriteHeader(http.StatusOK)
+		return
+
+	case http.MethodDelete:
+		ServerErr := usecase.DeleteUser(UserId)
+		if ServerErr != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		GetMembers(w)
+		w.WriteHeader(http.StatusOK)
+		return
+
+	case http.MethodOptions:
+		return
 
 	default:
 		log.Printf("fail: HTTP Method is %s\n", r.Method)

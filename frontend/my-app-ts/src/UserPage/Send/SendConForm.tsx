@@ -23,31 +23,36 @@ type SendConFormProps = {
 export function SendConForm(props :SendConFormProps) {
     const {loginUser, setLoginUser} = React.useContext(UserContext);
     const [receiveUser, setReceiveUser] = React.useState(UserDemo);
-    const handleSendCon = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        if (!data.get('conPoint')) {
-            alert("conPointを入力してください");
-            return;
-        } else if (!data.get('message')) {
+    const [point, setPoint] = React.useState<number>();
+    const [message, setMessage] = React.useState('');
+    let a : number | undefined = 2;
+    const handleSendCon = async () => {
+        if (point !== undefined) {
+            if (point < 0 || point > 100) {
+                alert("conPointが不正な値です");
+                return;
+            }
+        } else if (message == '') {
             alert("メッセージを入力してください");
             return;
         } else if (!receiveUser) {
             alert("送る相手を選択してください");
             return;
+        } else if (message.length > 100 ) {
+            alert("メッセージは100文字までです");
+            return;
         }
-        const pointornull = data.get('conPoint');
-        if (pointornull != null) {
-            const point :Number = +pointornull;
-            await axios.post(baseURL + "/send?user_id=" + loginUser.user_id, {sender: loginUser, receiver: receiveUser, point: point, message: data.get('message')})
-            .then((response :any) => {
-                const sent_cons: Con[] = toTimeCons(response.data.sent_cons);
-                if (sent_cons !== undefined) {
-                    props.setSentCons(sent_cons);
-                }
-            })
-            .catch((err) => {throw Error(`Failed to post con: ${err}`)});
-        }
+        await axios.post(baseURL + "/send?user_id=" + loginUser.user_id, {sender: loginUser, receiver: receiveUser, point: point, message: message})
+        .then((response :any) => {
+            const sent_cons: Con[] = toTimeCons(response.data.sent_cons);
+            if (sent_cons !== undefined) {
+                props.setSentCons(sent_cons);
+            }
+            setReceiveUser(UserDemo);
+            setPoint(0);
+            setMessage('');
+        })
+        .catch((err) => {throw Error(`Failed to post con: ${err}`)});
     };
 
     return (
@@ -57,7 +62,7 @@ export function SendConForm(props :SendConFormProps) {
                     <Typography component="h1" variant="h6">
                         送る
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSendCon} sx={{ mt: 3 }}>
+                    <Box sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <SendUserSelect 
                                 users={props.others}
@@ -68,28 +73,44 @@ export function SendConForm(props :SendConFormProps) {
                             />
                             <Grid item xs={12} sm={6}>
                                 <TextField
+                                    required
+                                    error={point!== undefined && (point < 0 || point > 100)}
                                     id="conPoint"
                                     name="conPoint"
                                     label="送るConポイント"
                                     type="number"
+                                    value={point}
+                                    onChange={(event) => {
+                                        if (event.target.value === "") {
+                                            setPoint(undefined)
+                                        } else {
+                                            setPoint(Number(event.target.value))
+                                        }
+                                    }}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                     variant="standard"
+                                    helperText="100ポイントまで"
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={100} width={500}>
+                            <Grid item xs={12} sm={100} width={500} sx={{mr: 3, ml: 3}}>
                             <TextField 
+                                required
                                 fullWidth
+                                error={message.length > 100}
+                                onChange={(event) => setMessage(event.target.value)}
+                                value={message}
                                 name="message"
                                 id="message" 
                                 label="メッセージ" 
-                                variant="standard" 
+                                variant="standard"
+                                helperText="100文字まで"
                             />
                             </Grid>
                         </Grid>
                         <Button
-                            type="submit"
+                            onClick={handleSendCon}
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >

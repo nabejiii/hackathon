@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,8 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Title from '../Title';
-import {Con, conDemo, editCon} from '../Con';
-import DeleteButton from './DeleteButton';
+import { Con } from '../Con';
 import SentConContent from './SentConContent';
 import SentConEdit from './SentConEdit';
 import { User } from '../../SignIn/User';
@@ -39,7 +37,7 @@ export default function SentConsTable(props: SentConsTableProps) {
                 <TableCell>送った相手</TableCell>
                 <TableCell align="center">Con Point</TableCell>
                 <TableCell>メッセージ</TableCell>
-                <TableCell></TableCell>
+                <TableCell sx={{...(editConId == '' && {display: 'none'})}}></TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
@@ -47,7 +45,7 @@ export default function SentConsTable(props: SentConsTableProps) {
               {props.sentCons.map((con) => (
                 <>
                 <TableRow key={con.con_id} sx={{...(con.con_id == editConId && {display: 'none'})}}>
-                  <SentConContent con={con} setSentCons={props.setSentCons} setEditConId={setEditConId}/>
+                  <SentConContent con={con} setSentCons={props.setSentCons} setEditConId={setEditConId} editConId={editConId}/>
                 </TableRow>
                 <TableRow key={"edit" + con.con_id} sx={{...(!(con.con_id == editConId) && {display: 'none'})}}>
                   <SentConEdit others={props.others} con={con} setSentCons={props.setSentCons} setEditConId={setEditConId}/>

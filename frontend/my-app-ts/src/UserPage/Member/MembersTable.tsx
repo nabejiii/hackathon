@@ -7,8 +7,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Avatar from '@mui/material/Avatar';
 import Title from '../Title';
-import {Con} from '../Con';
 import { Member } from './Member';
+import MemberContent from './MemberContent';
+import { UserContext } from '../../UserProvider';
+import MemberEdit from './MemberEdit';
 
 
 function preventDefault(event: React.MouseEvent) {
@@ -17,9 +19,12 @@ function preventDefault(event: React.MouseEvent) {
 
 type MembersTableProps = {
   members :Member[]
+  setMembers :React.Dispatch<React.SetStateAction<Member[]>>
 }
 
 export default function MembersTable(props: MembersTableProps) {
+  const [edit, setEdit] = React.useState(false);
+  const {loginUser} = React.useContext(UserContext);
   return (
     <React.Fragment>
       <Title>メンバー</Title>
@@ -28,16 +33,22 @@ export default function MembersTable(props: MembersTableProps) {
           <TableRow>
             <TableCell></TableCell>
             <TableCell>氏名</TableCell>
-            <TableCell align="center">Con Point</TableCell>
+            <TableCell sx={{...(!edit && {display: 'none'})}}></TableCell>
+            <TableCell align="center">今週の ConPoint</TableCell>
+            <TableCell align="center">累計 ConPoint</TableCell><TableCell sx={{...(!edit && {display: 'none'})}}></TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.members.reverse().map((member) => (
-            <TableRow key={member.user_id}>
-              <TableCell><Avatar /></TableCell>
-              <TableCell>{member.last_name + ' ' + member.first_name}</TableCell>
-              <TableCell align="center">{member.point.toString()}</TableCell>
+          {props.members.map((member) => (
+            <>
+            <TableRow key={member.user_id} sx={{...(edit && member.user_id == loginUser.user_id && {display: 'none'})}}>
+              <MemberContent edit={edit} member={member} setEdit={setEdit}/>
             </TableRow>
+            <TableRow key={"edit" + member.user_id} sx={{...(!(edit && member.user_id == loginUser.user_id) && {display: 'none'})}}>
+              <MemberEdit member={member} setMembers={props.setMembers} setEdit={setEdit}/>
+            </TableRow>
+            </>
           ))}
         </TableBody>
       </Table>

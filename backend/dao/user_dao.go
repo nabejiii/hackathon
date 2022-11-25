@@ -4,6 +4,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"hackathon/model"
 	"log"
+	"time"
 )
 
 func GetUsers() ([]model.User, error) {
@@ -73,7 +74,7 @@ func GetUserInfo(UserId string) (model.User, error) {
 	return user, err
 }
 
-func GetMembers() ([]model.Member, error) {
+func GetMembers(day time.Time) ([]model.Member, error) {
 	rows, ServerErr := db.Query("SELECT user_id, first_name, last_name FROM users")
 	if ServerErr != nil {
 		log.Printf("fail: db.Query, %v\n", ServerErr)
@@ -90,11 +91,32 @@ func GetMembers() ([]model.Member, error) {
 			}
 			return nil, err
 		}
-		err := db.QueryRow("SELECT SUM(point) FROM contributions WHERE receiver_id = ?", m.UserId).Scan(&m.Point)
+		err := db.QueryRow("SELECT SUM(point) FROM contributions WHERE receiver_id = ?", m.UserId).Scan(&m.TotalPoint)
 		if err != nil {
-			m.Point = 0
+			m.TotalPoint = 0
+		}
+		err = db.QueryRow("SELECT SUM(point) FROM contributions WHERE receiver_id = ? AND time > ?", m.UserId, day).Scan(&m.WeekPoint)
+		if err != nil {
+			m.WeekPoint = 0
 		}
 		members = append(members, m)
 	}
 	return members, ServerErr
+}
+
+func DeleteUser(UserId string) error {
+	tx, err := db.Begin()
+	if err != nil {
+		log.Printf("fail: db.Begin, %v\n", err)
+		return err
+	}
+	_, err = db.Query("DELETE FROM users WHERE user_id = ?", UserId)
+	if err != nil {
+		tx.Rollback()
+		log.Printf("fail: db.Query, %v\n", err)
+		return err
+	} else {
+		tx.Commit()
+	}
+	return err
 }

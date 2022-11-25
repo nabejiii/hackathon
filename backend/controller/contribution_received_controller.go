@@ -9,12 +9,12 @@ import (
 )
 
 func GetRecCons(w http.ResponseWriter, UserId string) {
-	point, ReceivedCons, ServerErr := usecase.GetRecCons(UserId)
+	weekPoint, totalPoint, ReceivedCons, ServerErr := usecase.GetRecCons(UserId)
 	if ServerErr != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	Response := model.RecConsResForHTTPGet{Point: point, ReceivedCons: ReceivedCons}
+	Response := model.RecConsResForHTTPGet{TotalPoint: totalPoint, WeekPoint: weekPoint, ReceivedCons: ReceivedCons}
 	bytes, ServerErr := json.Marshal(Response)
 	if ServerErr != nil {
 		log.Printf("fail: json.Marshal, %v\n", ServerErr)

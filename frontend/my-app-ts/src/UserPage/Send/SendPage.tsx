@@ -1,27 +1,13 @@
 import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import { ListItems } from '../listItems';
 import SentConsTable from './SentConsTable';
 import Copyright from '../../SignIn/Copyright'
-import {Con, editCon} from '../Con'
+import {Con} from '../Con'
 import { FetchSentCons } from './FetchSentCons';
 import { UserContext } from '../../UserProvider';
 import UserPageDrawer from '../Drawer'
@@ -35,9 +21,8 @@ import { baseURL } from '../../App';
 
 
 function SendPageContent() {
-  const [open, setOpen] = React.useState(false);
   const [sentCons, setSentCons] = React.useState<Con[]>([])
-  const {loginUser, setLoginUser} = React.useContext(UserContext);
+  const {loginUser} = React.useContext(UserContext);
   const navigate = useNavigate()
   const [others, setOthers] = React.useState<User[]>([])
   const FetchOthers = async () => {
@@ -58,8 +43,8 @@ function SendPageContent() {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <UserPageAppBar open={open} setOpen={setOpen}/>
-        <UserPageDrawer open={open} setOpen={setOpen}/>
+        <UserPageAppBar/>
+        <UserPageDrawer/>
         <Box
           component="main"
           sx={{

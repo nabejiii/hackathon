@@ -25,8 +25,8 @@ day5.setDate(day5.getDate() - 1)
 day6.setDate(day6.getDate() - 0)
 
 type ChartProps = {
+  totalPoint: number
   RecCons: Con[]
-  setweekPoint: React.Dispatch<React.SetStateAction<number>>
 }
 
 export default function Chart(props :ChartProps) {
@@ -36,7 +36,8 @@ export default function Chart(props :ChartProps) {
     amount: number | undefined;
   }[]= [];
   const week = [day0, day1, day2, day3, day4, day5, day6];
-  for (let day = 0; day < 7; day++) {
+  let prePoint = 0;
+  for (let day = 6; day >= 0; day--) {
     let point:number = 0;
     for (const con of props.RecCons) {
       if (week[day].getDate() === con.time.getDate()) {
@@ -44,26 +45,24 @@ export default function Chart(props :ChartProps) {
       }
     }
       if (data.length == 0) {
-        data.push(createData(week[day].toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" }), point));
+        data.push(createData(week[day].toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" }), props.totalPoint));
+        prePoint = point;
       } else {
-        const pre_point = data[data.length - 1].amount;
-        if (pre_point != undefined) {
-          point += pre_point;
+        const nextPoint = data[data.length - 1].amount;
+        if (nextPoint != undefined) {
+          prePoint = nextPoint - prePoint;
         }
-        data.push(createData(week[day].toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" }), point));
+        data.push(createData(week[day].toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" }), prePoint));
+        prePoint = point;
       }
-  }
-  const weekPoint = data[data.length - 1].amount;
-  if (weekPoint != undefined) {
-    props.setweekPoint(weekPoint);
   }
 
   return (
     <React.Fragment>
-      <Title>今週の推移</Title>
+      <Title>最近の推移</Title>
       <ResponsiveContainer>
         <LineChart
-          data={data}
+          data={data.reverse()}
           margin={{
             top: 16,
             right: 16,
