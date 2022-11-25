@@ -15,6 +15,7 @@ import Copyright from '../SignIn/Copyright';
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import SignIn, { theme } from '../SignIn/Login'
 import axios from 'axios';
+import { baseURL } from '../App';
 
 
 
@@ -34,7 +35,7 @@ export default function SignUp() {
     } else if (firstName.toString().length >25) {
         alert("25文字以内で入力してください")
     }
-    await axios.post('http://localhost:8080/signup', {first_name: data.get('firstName'), last_name: data.get('lastName')})
+    await axios.post(baseURL + '/signup', {first_name: data.get('firstName'), last_name: data.get('lastName')})
     .then(() => {
         navigate('/login');
     })

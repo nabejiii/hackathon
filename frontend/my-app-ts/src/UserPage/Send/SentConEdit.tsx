@@ -10,6 +10,7 @@ import SendUserSelect from './SendUserSelect';
 import { User } from '../../SignIn/User';
 import axios from 'axios';
 import { UserContext } from '../../UserProvider';
+import { baseURL } from '../../App';
 
 type SentConEditProps = {
     others: User[]
@@ -28,7 +29,7 @@ export default function SentConEdit(props: SentConEditProps) {
             alert("Please enter message");
             return;
         }
-        await axios.put("http://localhost:8080/send?user_id=" + loginUser.user_id, {con_id: props.con.con_id , sender: loginUser, receiver: receiver, point: point, message: message})
+        await axios.put(baseURL + "/send?user_id=" + loginUser.user_id, {con_id: props.con.con_id , sender: loginUser, receiver: receiver, point: point, message: message})
         .then((response :any) => {
             const sent_cons: Con[] = toTimeCons(response.data.sent_cons);
             if (sent_cons !== undefined) {

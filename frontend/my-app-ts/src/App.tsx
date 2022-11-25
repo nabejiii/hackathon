@@ -8,12 +8,13 @@ import {UserProvider} from './UserProvider'
 import SendPage from './UserPage/Send/SendPage'
 import Members from './UserPage/Member/MemberPage';
 
+export const baseURL = "https://hackathon-5m4bkii35a-uc.a.run.app";
+
 export default function App() {
   return (
     <UserProvider>
       <BrowserRouter>
         <div className="App">
-
           <Routes>
             <Route path="login" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />

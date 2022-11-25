@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { Con, toTimeCons } from '../Con';
 import { UserContext } from '../../UserProvider';
+import { baseURL } from '../../App';
 
 type DeleteButtonProps = {
     con_id :string
@@ -62,7 +63,7 @@ export default function DeleteButton (props :DeleteButtonProps) {
     const {loginUser, setLoginUser} = React.useContext(UserContext);
     const handleDelete = (e :any) => {
         const conId = e.currentTarget.dataset['id'];
-        axios.delete('http://localhost:8080/send?user_id=' + loginUser.user_id, {data :{con_id: conId}})
+        axios.delete(baseURL + '/send?user_id=' + loginUser.user_id, {data :{con_id: conId}})
         .then((response :any) => {
             const sent_cons: Con[] = toTimeCons(response.data.sent_cons);
             if (sent_cons !== undefined) {
