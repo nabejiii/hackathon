@@ -30,13 +30,12 @@ import UserPageDrawer from '../Drawer'
 import UserPageAppBar from '../AppBar'
 import { UserDemo } from '../../SignIn/User';
 import { useNavigate } from 'react-router-dom';
-
-
-const mdTheme = createTheme();
+import { theme } from '../../SignIn/Login';
 
 function DashboardContent() {
   const [open, setOpen] = React.useState(false);
-  const [point, setPoint] = React.useState<Number>(0);
+  const [point, setPoint] = React.useState<number>(0);
+  const [weekPoint, setweekPoint] = React.useState<number>(0);
   const [RecCons, setRecCons] = React.useState<Con[]>([])
   const {loginUser, setLoginUser} = React.useContext(UserContext);
   const navigate = useNavigate();
@@ -48,7 +47,7 @@ function DashboardContent() {
   },[]);
 
   return (
-    <ThemeProvider theme={mdTheme}>
+    <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <UserPageAppBar open={open} setOpen={setOpen}/>
@@ -68,7 +67,6 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
@@ -78,10 +76,9 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Chart />
+                  <Chart RecCons={RecCons} setweekPoint={setweekPoint}/>
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -91,10 +88,9 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Points point={point}/>
+                  <Points point={point} weekPoint={weekPoint}/>
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <RecConsTable RecCons={RecCons} />

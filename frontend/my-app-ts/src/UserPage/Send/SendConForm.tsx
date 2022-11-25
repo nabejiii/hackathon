@@ -15,21 +15,12 @@ import { Con, toTimeCons } from "../Con";
 const theme = createTheme();
 
 type SendConFormProps = {
+    others: User[]
     setSentCons: React.Dispatch<React.SetStateAction<Con[]>>
 }
 
 export function SendConForm(props :SendConFormProps) {
     const {loginUser, setLoginUser} = React.useContext(UserContext);
-    const [users, setUsers] = React.useState<User[]>([])
-    const FetchOthers = async () => {
-      await axios
-      .get("http://localhost:8000/login")
-      .then((response :any) => {setUsers(response.data.filter((user :User)=>(user.user_id != loginUser.user_id)))})
-      .catch((err :Error) => {throw Error(`Failed to fetch others: ${err}`)})
-    };
-    React.useEffect(() => {
-        FetchOthers()
-    },[]);
     const [receiveUser, setReceiveUser] = React.useState(UserDemo);
     const handleSendCon = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -47,7 +38,7 @@ export function SendConForm(props :SendConFormProps) {
         const pointornull = data.get('conPoint');
         if (pointornull != null) {
             const point :Number = +pointornull;
-            await axios.post("http://localhost:8000/send?user_id=" + loginUser.user_id, {sender: loginUser, receiver: receiveUser, point: point, message: data.get('message')})
+            await axios.post("http://localhost:8080/send?user_id=" + loginUser.user_id, {sender: loginUser, receiver: receiveUser, point: point, message: data.get('message')})
             .then((response :any) => {
                 const sent_cons: Con[] = toTimeCons(response.data.sent_cons);
                 if (sent_cons !== undefined) {
@@ -68,9 +59,10 @@ export function SendConForm(props :SendConFormProps) {
                     <Box component="form" noValidate onSubmit={handleSendCon} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <SendUserSelect 
-                                users={users}
+                                users={props.others}
                                 receiveUser={receiveUser}
                                 setReceiveUser={setReceiveUser}
+                                helperText={"Conを送る相手を選んでください"}
                             />
                             <Grid item xs={12} sm={6}>
                                 <TextField

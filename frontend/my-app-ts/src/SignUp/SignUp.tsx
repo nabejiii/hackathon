@@ -13,11 +13,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from '../SignIn/Copyright';
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
-import SignIn from '../SignIn/Login'
+import SignIn, { theme } from '../SignIn/Login'
 import axios from 'axios';
 
 
-const theme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -27,15 +26,15 @@ export default function SignUp() {
     const firstName = data.get('firstName')
     const lastName = data.get('lastName')
     if (!firstName) {
-        alert("Please enter first name");
+        alert("名前を入力してください");
         return;
     } else if (!lastName) {
-        alert("Please enter last name");
+        alert("苗字を入力してください");
         return;
     } else if (firstName.toString().length >25) {
-      //ibuki白目剥いて寝てた/////////////////////////////////////////////////////
+        alert("25文字以内で入力してください")
     }
-    await axios.post('http://localhost:8000/signup', {first_name: data.get('firstName'), last_name: data.get('lastName')})
+    await axios.post('http://localhost:8080/signup', {first_name: data.get('firstName'), last_name: data.get('lastName')})
     .then(() => {
         navigate('/login');
     })
@@ -48,7 +47,7 @@ export default function SignUp() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 15,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -60,16 +59,16 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={HandleSubmitUser} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={HandleSubmitUser} sx={{ mt: 10 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="lastName"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="lastName"
+                  label="氏"
                   autoFocus
                 />
               </Grid>
@@ -77,9 +76,9 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
+                  id="firstName"
+                  label="名"
+                  name="firstName"
                   autoComplete="family-name"
                 />
               </Grid>
@@ -88,7 +87,7 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 15, mb: 2 }}
             >
               Sign Up
             </Button>

@@ -19,38 +19,29 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { ListItems } from '../listItems';
-import SentConsTable from './SentConsTable';
 import Copyright from '../../SignIn/Copyright'
-import {Con, editCon} from '../Con'
-import { FetchSentCons } from './FetchSentCons';
+import {Con} from '../Con'
 import { UserContext } from '../../UserProvider';
 import UserPageDrawer from '../Drawer'
 import UserPageAppBar from '../AppBar'
-import { SendConForm } from './SendConForm';
-import { User, UserDemo } from '../../SignIn/User';
+import { UserDemo } from '../../SignIn/User';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import MembersTable from './MembersTable';
+import { fetchMembers } from './fetchMembers';
+import { Member } from './Member';
 import { theme } from '../../SignIn/Login';
 
 
-function SendPageContent() {
+function MembersContents() {
   const [open, setOpen] = React.useState(false);
-  const [sentCons, setSentCons] = React.useState<Con[]>([])
+  const [members, setMembers] = React.useState<Member[]>([])
   const {loginUser, setLoginUser} = React.useContext(UserContext);
-  const navigate = useNavigate()
-  const [others, setOthers] = React.useState<User[]>([])
-  const FetchOthers = async () => {
-    await axios
-    .get("http://localhost:8080/login")
-    .then((response :any) => {setOthers(response.data.filter((user :User)=>(user.user_id != loginUser.user_id)))})
-    .catch((err :Error) => {throw Error(`Failed to fetch others: ${err}`)})
-  };
+  const navigate = useNavigate();
   React.useEffect(() => {
     if (loginUser == UserDemo) {
       navigate('/login');
     }
-    FetchSentCons(loginUser,setSentCons)
-    FetchOthers()
+    fetchMembers(setMembers)
   },[]);
 
   return (
@@ -71,11 +62,13 @@ function SendPageContent() {
             overflow: 'auto',
           }}
         >
-          <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="lg" sx={{ mt: 10, mb: 4 }}>
             <Grid container spacing={3}>
-              <SendConForm setSentCons={setSentCons} others={others}/>
-              <SentConsTable others={others} sentCons={sentCons} setSentCons={setSentCons}/>
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                    <MembersTable members={members}/>
+                </Paper>
+              </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
@@ -85,6 +78,6 @@ function SendPageContent() {
   );
 }
 
-export default function SendPage() {
-  return <SendPageContent />;
+export default function Members() {
+  return <MembersContents />;
 }

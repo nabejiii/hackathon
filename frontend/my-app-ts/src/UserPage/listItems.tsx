@@ -27,7 +27,7 @@ export function ListItems(){
       </ListItemIcon>
       <ListItemText primary="Send" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton onClick={()=>{navigate('/members')}}>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>

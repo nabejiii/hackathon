@@ -4,7 +4,7 @@ import { User, UserDemo } from "../SignIn/User";
 export type Con = {
     con_id :string;
     time :Date;
-    point :Number;
+    point :number;
     sender :User;
     receiver :User;
     message :string;
@@ -13,10 +13,14 @@ export type Con = {
 export type StrCon = {
     con_id :string;
     time :string;
-    point :Number;
+    point :number;
     sender :User;
     receiver :User;
     message :string;
+}
+
+export type editCon = Con & {
+    edit :boolean
 }
 
 export const conDemo :Con = {
