@@ -4,10 +4,11 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { ListItems } from './listItems';
+import { MainListItems, SecondaryListItems } from './listItems';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
+import { UserContext } from '../UserProvider';
 
 export const drawerWidth: number = 240;
 
@@ -36,19 +37,15 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
       },
     }),
     );
-    
 
-type UserPageDrawerProps = {
-    open :boolean
-    setOpen :React.Dispatch<React.SetStateAction<boolean>>
-}
 
-export default function UserPageDrawer (props :UserPageDrawerProps) {
+export default function UserPageDrawer () {
+    const {drawerOpen, setDrawerOpen} = React.useContext(UserContext);
     const toggleDrawer = () => {
-        props.setOpen(!props.open)
+        setDrawerOpen(!drawerOpen)
     }
     return (
-        <Drawer variant="permanent" open={props.open}>
+        <Drawer variant="permanent" open={drawerOpen}>
           <Toolbar
             sx={{
               display: 'flex',
@@ -57,17 +54,18 @@ export default function UserPageDrawer (props :UserPageDrawerProps) {
               px: [1],
             }}
           >
-            <IconButton onClick={toggleDrawer} sx={{...(!props.open && { display: 'none' })}}>
+            <IconButton onClick={toggleDrawer} sx={{...(!drawerOpen && { display: 'none' })}}>
               <ChevronLeftIcon />
             </IconButton>
-            <IconButton onClick={toggleDrawer} sx={{...(props.open && { display: 'none' })}}>
+            <IconButton onClick={toggleDrawer} sx={{...(drawerOpen && { display: 'none' })}}>
               <ChevronRightIcon />
             </IconButton>
           </Toolbar>
           <Divider />
           <List component="nav">
-            <ListItems />
+            <MainListItems />
             <Divider sx={{ my: 1 }} />
+            <SecondaryListItems />
           </List>
         </Drawer>
     )

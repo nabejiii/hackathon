@@ -57,7 +57,6 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Logo/>
           <Box sx={{ mt: 8}}>
             <UserDialog setUser={setLoginUser}/>
             <Button
@@ -72,7 +71,7 @@ export default function SignIn() {
             <Grid container>
               <Grid item xs>
                 <Link href={'/signup'} variant="body2">
-                  {"アカウントを持っていないですか? Sign Up"}
+                  {"アカウントを持っていませんか? サインアップ"}
                 </Link>
               </Grid>
             </Grid>

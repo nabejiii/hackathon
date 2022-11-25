@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="132cd447-3472-4646-81c6-5d825d9cba5f" name="変更" comment="" />
+    <list default="true" id="132cd447-3472-4646-81c6-5d825d9cba5f" name="変更" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/contribution_received_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contribution_received_controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/members_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/members_controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/user_info_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/user_info_controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/user_login_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/user_login_controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/contribution_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/dao/contribution_dao.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/user_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/dao/user_dao.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/contribution.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/contribution.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usecase/contribution_get_usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/usecase/contribution_get_usecase.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usecase/members_get_usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/usecase/members_get_usecase.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/SignIn/LoginUserDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/SignIn/LoginUserDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/SignUp/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/SignUp/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/AppBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/AppBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Con.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Con.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Home/fetchRecCons.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Home/fetchRecCons.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/DeleteButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/DeleteButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SendConForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SendConForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SendPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SendPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConEdit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/my-app-ts/src/UserPage/Send/SentConsTable.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

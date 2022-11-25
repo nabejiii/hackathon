@@ -4,27 +4,30 @@ import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Con } from '../Con';
-import DeleteButton from './DeleteButton';
+import { orange } from '@mui/material/colors';
+import Avatar from '@mui/material/Avatar';
+import DeleteUserButton from './DeleteUserButton';
+import { Member } from './Member';
+import { UserContext } from '../../UserProvider';
 
-type SentConContentProps = {
-    con: Con
-    setSentCons: React.Dispatch<React.SetStateAction<Con[]>>
-    editConId: string
-    setEditConId: React.Dispatch<React.SetStateAction<string>>
+type MemberContentProps = {
+    member: Member
+    edit: boolean
+    setEdit: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 35;
 
 const options = [
     '編集',
     '削除'
 ]
 
-export default function SentConContent(props: SentConContentProps) {
+export default function MemberContent(props: MemberContentProps) {
+    const {loginUser} = React.useContext(UserContext);
     const handleEdit = () => {
-        props.setEditConId(props.con.con_id);
         handleMenuClose();
+        props.setEdit(true);
     }
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -36,13 +39,12 @@ export default function SentConContent(props: SentConContentProps) {
     };
     return (
         <>
-            <TableCell>{props.con.time.toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" })}</TableCell>
-            <TableCell>{props.con.receiver.last_name + ' ' + props.con.receiver.first_name}</TableCell>
-            <TableCell align="center">{props.con.point.toString()}</TableCell>
-            <TableCell>{props.con.message}</TableCell>
-            <TableCell sx={{...(props.editConId == '' && {display: 'none'})}}></TableCell>
-            <TableCell sx={{...(!(props.editConId != '') && {display: 'none'})}}></TableCell>
-            <TableCell sx={{...(props.editConId != '' && {display: 'none'})}}>
+            <TableCell><Avatar sx={{bgcolor: orange[100], color: orange[600]}}/></TableCell>
+            <TableCell>{props.member.last_name + ' ' + props.member.first_name}</TableCell>
+            <TableCell sx={{...(!props.edit && {display: 'none'})}}></TableCell>
+            <TableCell align="center">{props.member.week_point.toString()}</TableCell>
+            <TableCell align="center">{props.member.total_point.toString()}</TableCell>
+            <TableCell sx={{...(!(props.member.user_id == loginUser.user_id) && {display: 'none'})}}>
                 <IconButton
                     aria-label="more"
                     id="long-button"
@@ -63,15 +65,17 @@ export default function SentConContent(props: SentConContentProps) {
                     onClose={handleMenuClose}
                     PaperProps={{
                     style: {
-                        maxHeight: ITEM_HEIGHT * 4.5,
-                        width: '7.5ch',
+                        maxHeight: ITEM_HEIGHT * 3,
+                        width: '16ch',
                     },
                     }}
                 >
-                    <MenuItem onClick={handleEdit}>編集</MenuItem>
-                    <DeleteButton con_id={props.con.con_id} setSentCons={props.setSentCons} handleMenuClose={handleMenuClose}/>
+                    <MenuItem divider={true} onClick={handleEdit}>ユーザー編集</MenuItem>
+                    <DeleteUserButton handleMenuClose={handleMenuClose}/>
                 </Menu>
             </TableCell>
+            <TableCell sx={{...((props.member.user_id == loginUser.user_id) && {display: 'none'})}}></TableCell>
+            <TableCell sx={{...(!props.edit && {display: 'none'})}}></TableCell>
         </>
     )
 }

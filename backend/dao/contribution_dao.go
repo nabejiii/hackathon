@@ -3,15 +3,21 @@ package dao
 import (
 	"hackathon/model"
 	"log"
+	"time"
 )
 
-func GetPointSum(UserId string) (int, error) {
-	var p int
-	err := db.QueryRow("SELECT SUM(point) FROM contributions WHERE receiver_id = ?", UserId).Scan(&p)
-	if err != nil {
-		return 0, err
+func GetPointSum(UserId string, day time.Time) (int, int, error) {
+	var totalPoint int
+	err1 := db.QueryRow("SELECT SUM(point) FROM contributions WHERE receiver_id = ?", UserId).Scan(&totalPoint)
+	if err1 != nil {
+		return 0, 0, err1
 	}
-	return p, err
+	var weekPoint int
+	err2 := db.QueryRow("SELECT SUM(point) FROM contributions WHERE receiver_id = ? AND time > ?", UserId, day).Scan(&weekPoint)
+	if err2 != nil {
+		return totalPoint, 0, err2
+	}
+	return weekPoint, totalPoint, nil
 }
 
 func GetReceivedCons(UserId string) ([]model.Con, error) {

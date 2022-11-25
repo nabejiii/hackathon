@@ -1,6 +1,4 @@
 import axios from 'axios';
-import {Con, toTimeCons} from '../Con';
-import { User } from '../../SignIn/User';
 import { baseURL } from '../../App';
 
 

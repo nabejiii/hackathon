@@ -4,20 +4,18 @@ import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
-import TableCell from '@mui/material/TableCell';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
-import { Con, toTimeCons } from '../Con';
 import { UserContext } from '../../UserProvider';
 import { baseURL } from '../../App';
+import { useNavigate } from 'react-router-dom';
+import { UserDemo } from '../../SignIn/User';
 
-type DeleteButtonProps = {
-    con_id :string
-    setSentCons :React.Dispatch<React.SetStateAction<Con[]>>
+type DeleteUserButtonProps = {
     handleMenuClose: () => void
 }
 
@@ -61,16 +59,14 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 }
   
 
-export default function DeleteButton (props :DeleteButtonProps) {
+export default function DeleteUserButton (props :DeleteUserButtonProps) {
     const {loginUser, setLoginUser} = React.useContext(UserContext);
-    const handleDelete = (e :any) => {
-        const conId = e.currentTarget.dataset['id'];
-        axios.delete(baseURL + '/send?user_id=' + loginUser.user_id, {data :{con_id: conId}})
-        .then((response :any) => {
-            const sent_cons: Con[] = toTimeCons(response.data.sent_cons);
-            if (sent_cons !== undefined) {
-                props.setSentCons(sent_cons);
-            }
+    const navigate = useNavigate()
+    const handleDelete = () => {
+        axios.delete(baseURL + '/user?user_id=' + loginUser.user_id)
+        .then(() => {
+            setLoginUser(UserDemo)
+            navigate('/login');
         })
         .catch((err) => {throw Error(`Failed to delete con: ${err}`)});
         handleClose();
@@ -90,7 +86,7 @@ export default function DeleteButton (props :DeleteButtonProps) {
 
     return (
         <>
-            <MenuItem onClick={handleClickOpen} sx={{color: 'red'}}>削除</MenuItem>
+            <MenuItem onClick={handleClickOpen} sx={{color: 'red'}}>ユーザー削除</MenuItem>
         <>
             <BootstrapDialog
                 onClose={handleClose}
@@ -106,7 +102,7 @@ export default function DeleteButton (props :DeleteButtonProps) {
                 </Typography>
                 </DialogContent>
                 <DialogActions>
-                <Button autoFocus onClick={handleDelete} data-id={props.con_id}>
+                <Button autoFocus onClick={handleDelete}>
                     削除
                 </Button>
                 </DialogActions>

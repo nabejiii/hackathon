@@ -10,7 +10,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { useNavigate } from 'react-router-dom';
 
-export function ListItems(){
+export function MainListItems(){
   const navigate = useNavigate();
 
   return (
@@ -19,19 +19,28 @@ export function ListItems(){
       <ListItemIcon>
         <HomeIcon />
       </ListItemIcon>
-      <ListItemText primary="Home" />
+      <ListItemText primary="ホーム" />
     </ListItemButton>
     <ListItemButton onClick={()=>{navigate('/send')}}>
       <ListItemIcon>
         <SendIcon />
       </ListItemIcon>
-      <ListItemText primary="Send" />
+      <ListItemText primary="送る" />
     </ListItemButton>
+  </React.Fragment>
+  )
+}
+
+export function SecondaryListItems(){
+  const navigate = useNavigate();
+
+  return (
+    <React.Fragment>
     <ListItemButton onClick={()=>{navigate('/members')}}>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Members" />
+      <ListItemText primary="メンバー" />
     </ListItemButton>
   </React.Fragment>
   )

@@ -15,6 +15,7 @@ import { orange } from '@mui/material/colors';
 import {User, UserDemo, UserDialogProps} from './User';
 import Box from '@mui/material/Box';
 import { baseURL } from '../App';
+import pic from "../image/foxpic.png";
 
 function UserDialogContents(props: UserDialogProps) {
     const [users,setUsers] = React.useState<User[]>([])
@@ -53,14 +54,6 @@ function UserDialogContents(props: UserDialogProps) {
                 <ListItemText primary={user.long_name} />
             </ListItem>
             ))}
-            <ListItem autoFocus button onClick={() => handleListItemClick(users[0])}>
-            <ListItemAvatar>
-                <Avatar>
-                <AddIcon />
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Add account" />
-            </ListItem>
         </List>
         </Dialog>
     );
@@ -87,7 +80,9 @@ export default function SimpleDialogDemo(props :SimpleDialogDemoProps) {
 
   return (
     <div>
-      <Typography variant="subtitle1" component="div" fontSize={25}>
+      <Typography 
+            variant="subtitle1" component="div" fontSize={30} >
+        <img src={pic} alt="foxpic" width={60}></img>
         Con !!
       </Typography>
       <Box sx={{
@@ -96,7 +91,7 @@ export default function SimpleDialogDemo(props :SimpleDialogDemoProps) {
             flexDirection: 'column',
             alignItems: 'center',
       }}>
-        <Avatar sx={{ bgcolor: orange[100], color: orange[600] }}>
+        <Avatar sx={{ bgcolor: orange[100], color: orange[600], ...((selectedUser.long_name == "") && { display: 'none' })}}>
           <PersonIcon />
         </Avatar>
       </Box>

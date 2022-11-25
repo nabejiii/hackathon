@@ -6,17 +6,20 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
-import PersonIcon from '@mui/icons-material/Person';
-import { orange } from '@mui/material/colors';
+import { UserContext } from '../UserProvider';
+import pic from "../image/foxpic.png";
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import { UserDemo } from '../SignIn/User';
+import { useNavigate } from 'react-router-dom';
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean;
-  }
+}
   
 export const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -36,32 +39,23 @@ export const AppBar = styled(MuiAppBar, {
     }),
 }));
 
-type UserPageAppBarProps = {
-    open :boolean
-    setOpen :React.Dispatch<React.SetStateAction<boolean>>
-}
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
-export default function UserPageAppBar(props :UserPageAppBarProps) {
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+export default function UserPageAppBar() {
+    const {loginUser, setLoginUser, drawerOpen, setDrawerOpen} = React.useContext(UserContext);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-      setAnchorElNav(event.currentTarget);
-    };
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
       setAnchorElUser(event.currentTarget);
-    };  
-    const handleCloseNavMenu = () => {
-      setAnchorElNav(null);
     };
     const handleCloseUserMenu = () => {
       setAnchorElUser(null);
     };
+    const navigate = useNavigate()
+    const handleLogout = () => {
+      setLoginUser(UserDemo);
+      navigate('/login');
+    }
 
     return (
-        <AppBar position="absolute" open={props.open}>
+        <AppBar position="absolute" open={drawerOpen}>
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
@@ -71,10 +65,10 @@ export default function UserPageAppBar(props :UserPageAppBarProps) {
               edge="start"
               color="inherit"
               aria-label="open drawer"
-              onClick={() => {props.setOpen(!props.open)}}
+              onClick={() => {setDrawerOpen(!drawerOpen)}}
               sx={{
                 marginRight: '36px',
-                ...(props.open && { display: 'none' }),
+                ...(drawerOpen && { display: 'none' }),
               }}
             >
               <MenuIcon />
@@ -84,14 +78,21 @@ export default function UserPageAppBar(props :UserPageAppBarProps) {
               variant="h6"
               color="inherit"
               noWrap
-              sx={{ flexGrow: 1 }}
+              sx={{ 
+                flexGrow: 1,
+                display: 'flex',
+                alignItems: 'center',
+                textAlign: 'center',
+                fontSize: 25
+              }}
             >
-              Con !!
+            <img src={pic} alt="foxpic" width={33}></img>
+              　Con !!
             </Typography>
             <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="ログイン中のユーザー">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <AccountCircle />
               </IconButton>
             </Tooltip>
             <Menu
@@ -110,11 +111,13 @@ export default function UserPageAppBar(props :UserPageAppBarProps) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <Typography textAlign={"center"} sx={{mb: 1}}>
+                {loginUser.last_name + " " + loginUser.first_name}
+              </Typography>
+              <Divider />
+              <MenuItem onClick={handleLogout}>
+                  ログアウト
+              </MenuItem>
             </Menu>
           </Box>
           </Toolbar>

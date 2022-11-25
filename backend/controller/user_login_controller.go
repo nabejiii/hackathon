@@ -22,7 +22,6 @@ func GetUsers(w http.ResponseWriter) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(bytes)
-	w.WriteHeader(http.StatusOK)
 	return
 }
 
@@ -33,6 +32,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		GetUsers(w)
+		w.WriteHeader(http.StatusOK)
+		return
 
 	case http.MethodPut:
 		var user model.User
@@ -47,6 +48,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		GetUsers(w)
+		w.WriteHeader(http.StatusOK)
+		return
 
 	case http.MethodOptions:
 		return

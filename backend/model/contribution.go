@@ -12,7 +12,8 @@ type Con struct {
 }
 
 type RecConsResForHTTPGet struct {
-	Point        int   `json:"point"`
+	WeekPoint    int   `json:"week_point"`
+	TotalPoint   int   `json:"total_point"`
 	ReceivedCons []Con `json:"received_cons"`
 }
 

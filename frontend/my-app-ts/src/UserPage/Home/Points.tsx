@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Title from '../Title';
 
 type PointsProps = {
-  point :number;
+  totalPoint :number;
   weekPoint :number;
 }
 
@@ -13,15 +13,15 @@ export default function Points(props: PointsProps) {
   return (
     <React.Fragment>
       <Box sx={{mb:2}}>
-        <Title>累計 ConPoint</Title>
-        <Typography component="p" variant="h4">
-          {props.point.toString()}
-        </Typography>
-      </Box>
-      <Box sx={{mb:2}}>
         <Title>今週の ConPoint</Title>
         <Typography component="p" variant="h4">
           {props.weekPoint.toString()}
+        </Typography>
+      </Box>
+      <Box sx={{mb:2}}>
+        <Title>累計 ConPoint</Title>
+        <Typography component="p" variant="h4">
+          {props.totalPoint.toString()}
         </Typography>
       </Box>
       <Typography color="text.secondary" sx={{ flex: 1, fontSize: 15}}>
