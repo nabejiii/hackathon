@@ -12,18 +12,18 @@ import (
 var db *sql.DB
 
 func init() {
-	mysqlUser := "test_user"
+	/*mysqlUser := "test_user"
 	mysqlUserPwd := "password"
-	mysqlDatabase := "test_database?parseTime=true"
-	/*mysqlUser := os.Getenv("MYSQL_USER")
+	mysqlDatabase := "test_database?parseTime=true"*/
+	mysqlUser := os.Getenv("MYSQL_USER")
 	mysqlPwd := os.Getenv("MYSQL_PWD")
 	mysqlHost := os.Getenv("MYSQL_HOST")
 	mysqlDatabase := os.Getenv("MYSQL_DATABASE")
 
 	connStr := fmt.Sprintf("%s:%s@%s/%s", mysqlUser, mysqlPwd, mysqlHost, mysqlDatabase)
-	_db, err := sql.Open("mysql", connStr)*/
+	_db, err := sql.Open("mysql", connStr)
 
-	_db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@(localhost:3306)/%s", mysqlUser, mysqlUserPwd, mysqlDatabase))
+	//_db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@(localhost:3306)/%s", mysqlUser, mysqlUserPwd, mysqlDatabase))
 	if err != nil {
 		log.Fatalf("fail: sql.Open, %v\n", err)
 	}
