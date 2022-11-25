@@ -47,11 +47,13 @@ func UserInfoHandler(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
+		user.UserId = UserId
 		ServerErr := usecase.UpdateUser(user)
 		if ServerErr != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
+		GetMembers(w)
 		w.WriteHeader(http.StatusOK)
 		return
 
