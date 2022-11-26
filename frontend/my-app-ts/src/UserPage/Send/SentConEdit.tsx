@@ -27,14 +27,19 @@ export default function SentConEdit(props: SentConEditProps) {
             alert("メッセージを入力してください");
             return;
         }
+        if (point === undefined) {
+            alert("ConPointを入力してください")
+            return;
+        }
         if (point !== undefined) {
             if (point < 0 || point > 100) {
-                alert("conPointが不正な値です")
-                return
+                alert("ConPointが不正な値です")
+                return;
             }
         }
         if (receiver == UserDemo) {
             alert("ユーザーを選択してください")
+            return;
         }
         await axios.put(baseURL + "/send?user_id=" + loginUser.user_id, {con_id: props.con.con_id , sender: loginUser, receiver: receiver, point: point, message: message})
         .then((response :any) => {

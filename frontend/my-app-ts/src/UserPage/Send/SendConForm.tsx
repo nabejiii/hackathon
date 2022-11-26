@@ -27,18 +27,25 @@ export function SendConForm(props :SendConFormProps) {
     const [message, setMessage] = React.useState('');
     let a : number | undefined = 2;
     const handleSendCon = async () => {
-        if (point !== undefined) {
-            if (point < 0 || point > 100) {
-                alert("conPointが不正な値です");
-                return;
-            }
-        } else if (message == '') {
-            alert("メッセージを入力してください");
-            return;
-        } else if (!receiveUser) {
+        if (receiveUser === UserDemo) {
             alert("送る相手を選択してください");
             return;
-        } else if (message.length > 100 ) {
+        }
+        if (point === undefined) {
+            alert("ConPointを入力してください")
+            return;
+        }
+        if (point !== undefined) {
+            if (point < 0 || point > 100) {
+                alert("ConPointが不正な値です");
+                return;
+            }
+        } 
+        if (message == '') {
+            alert("メッセージを入力してください");
+            return;
+        }
+        if (message.length > 100 ) {
             alert("メッセージは100文字までです");
             return;
         }
@@ -112,6 +119,7 @@ export function SendConForm(props :SendConFormProps) {
                         <Button
                             onClick={handleSendCon}
                             variant="contained"
+                            color={"primary"}
                             sx={{ mt: 3, mb: 2 }}
                         >
                             送信
