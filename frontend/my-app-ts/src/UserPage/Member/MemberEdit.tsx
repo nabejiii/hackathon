@@ -2,7 +2,7 @@ import * as React from 'react';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import { orange } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
 import { Button } from '@mui/material';
 import { Member } from './Member';
@@ -30,7 +30,7 @@ export default function MemberEdit(props: MemberEditProps) {
             return;
         }
         if (firstName.length > 25 || lastName.length > 25) {
-            alert("氏名は25文字までで入力してください");
+            alert("氏名は25文字以内で入力してください");
             return;
         }
         await axios.put(baseURL + "/user?user_id=" + loginUser.user_id, {first_name: firstName, last_name: lastName})
@@ -56,10 +56,11 @@ export default function MemberEdit(props: MemberEditProps) {
         
     return (
         <>
-            <TableCell><Avatar /></TableCell>
+            <TableCell><Avatar sx={{bgcolor: orange[100], color: orange[600]}}/></TableCell>
             <TableCell align="center">
                 <TextField
                     error={lastName.length > 25 || lastName==""}
+                    helperText={(lastName.length > 25 && ("25文字以内で入力してください")) || (lastName == "" && ("必須です"))}
                     id="lastName"
                     name="lastName"
                     label="氏"
@@ -75,6 +76,7 @@ export default function MemberEdit(props: MemberEditProps) {
             <TableCell>
                 <TextField 
                     error={firstName.length > 25 || firstName==""}
+                    helperText={(firstName.length > 25 && ("25文字以内で入力してください")) || (firstName == "" && ("必須です"))}
                     onChange={(event) => setFirstName(event.target.value)}
                     value={firstName}
                     name="firstName"

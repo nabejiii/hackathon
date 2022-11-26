@@ -87,9 +87,13 @@ export default function UserPageAppBar() {
               }}
             >
             <img src={pic} alt="foxpic" width={33}></img>
-              　Con !!
+              {"　Con !!"}
             </Typography>
-            <Box sx={{ flexGrow: 0 }}>
+            <Box sx={{ flexGrow: 0,
+                display: 'flex',
+                alignItems: 'center',
+                textAlign: 'center',
+                fontSize: 25}}>
             <Tooltip title="ログイン中のユーザー">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <AccountCircle />
