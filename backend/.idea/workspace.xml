@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="132cd447-3472-4646-81c6-5d825d9cba5f" name="変更" comment="" />
+    <list default="true" id="132cd447-3472-4646-81c6-5d825d9cba5f" name="変更" comment="">
+      <change beforePath="$PROJECT_DIR$/dao/init_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/dao/init_dao.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
