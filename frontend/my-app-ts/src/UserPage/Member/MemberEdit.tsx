@@ -1,5 +1,4 @@
 import * as React from 'react';
-import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TextField from '@mui/material/TextField';
 import { orange } from '@mui/material/colors';
@@ -9,6 +8,7 @@ import { Member } from './Member';
 import axios from 'axios';
 import { UserContext } from '../../UserProvider';
 import { baseURL } from '../../App';
+import { User } from '../../SignIn/User';
 
 type MemberEditProps = {
     setMembers: React.Dispatch<React.SetStateAction<Member[]>>
@@ -17,7 +17,7 @@ type MemberEditProps = {
 }
 
 export default function MemberEdit(props: MemberEditProps) {
-    const {loginUser} = React.useContext(UserContext);
+    const {loginUser, setLoginUser} = React.useContext(UserContext);
     const [firstName, setFirstName] = React.useState(loginUser.first_name);
     const [lastName, setLastName] = React.useState(loginUser.last_name);
     const handleEditMember = async () => {
@@ -44,6 +44,13 @@ export default function MemberEdit(props: MemberEditProps) {
             if(member != undefined) {
                 setFirstName(member.first_name);
                 setLastName(member.last_name);
+                const user :User = {
+                    user_id: member.user_id,
+                    first_name: member.first_name,
+                    last_name: member.last_name,
+                    long_name: member.last_name + " " + member.first_name
+                }
+                setLoginUser(user)
             }
         })
         .catch((err) => {throw Error(`Failed to post con: ${err}`)});
