@@ -6,6 +6,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { orange } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
+import EditIcon from '@mui/icons-material/Edit';
 import DeleteUserButton from './DeleteUserButton';
 import { Member } from './Member';
 import { UserContext } from '../../UserProvider';
@@ -66,11 +67,12 @@ export default function MemberContent(props: MemberContentProps) {
                     PaperProps={{
                     style: {
                         maxHeight: ITEM_HEIGHT * 3,
-                        width: '16ch',
+                        width: '7.5ch',
+                        textAlign: 'center'
                     },
                     }}
                 >
-                    <MenuItem divider={true} onClick={handleEdit}>ユーザー編集</MenuItem>
+                    <MenuItem divider={true} onClick={handleEdit}>編集</MenuItem>
                     <DeleteUserButton handleMenuClose={handleMenuClose}/>
                 </Menu>
             </TableCell>

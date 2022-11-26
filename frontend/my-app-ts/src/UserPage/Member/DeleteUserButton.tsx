@@ -86,7 +86,7 @@ export default function DeleteUserButton (props :DeleteUserButtonProps) {
 
     return (
         <>
-            <MenuItem onClick={handleClickOpen} sx={{color: 'red'}}>ユーザー削除</MenuItem>
+            <MenuItem onClick={handleClickOpen} sx={{color: 'red'}}>削除</MenuItem>
         <>
             <BootstrapDialog
                 onClose={handleClose}
