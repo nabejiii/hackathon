@@ -7,6 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Logout from '@mui/icons-material/Logout';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -100,7 +102,7 @@ export default function UserPageAppBar() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: '30px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -112,6 +114,12 @@ export default function UserPageAppBar() {
                 vertical: 'top',
                 horizontal: 'right',
               }}
+              PaperProps={{
+                style: {
+                    width: '18ch',
+                    textAlign: 'center'
+                },
+                }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
@@ -120,6 +128,9 @@ export default function UserPageAppBar() {
               </Typography>
               <Divider />
               <MenuItem onClick={handleLogout}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
                   ログアウト
               </MenuItem>
             </Menu>

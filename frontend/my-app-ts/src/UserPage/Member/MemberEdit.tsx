@@ -36,6 +36,10 @@ export default function MemberEdit(props: MemberEditProps) {
         await axios.put(baseURL + "/user?user_id=" + loginUser.user_id, {first_name: firstName, last_name: lastName})
         .then((response :any) => {
             const members: Member[] = response.data;
+            let result = response.data.sort(function(a :Member, b: Member) {
+                return (a.week_point > b.week_point) ? -1 : 1;
+            })
+            props.setMembers(response.data);
             if (members !== undefined) {
                 props.setMembers(members);
             }
