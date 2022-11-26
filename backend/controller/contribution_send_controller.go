@@ -66,7 +66,6 @@ func SendConHandler(w http.ResponseWriter, r *http.Request) {
 
 	case http.MethodPut:
 		var con model.Con
-		con.Receiver.UserId = UserId
 		RequestErr := json.NewDecoder(r.Body).Decode(&con)
 		if RequestErr != nil {
 			w.WriteHeader(http.StatusBadRequest)
