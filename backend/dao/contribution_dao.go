@@ -116,7 +116,7 @@ func UpdateCon(con model.Con) error {
 		log.Printf("fail: db.Begin, %v\n", err)
 		return err
 	}
-	_, err = db.Query("UPDATE contributions SET point = ?, message = ? WHERE con_id = ?", con.Point, con.Message, con.ConId)
+	_, err = db.Query("UPDATE contributions SET point = ?, message = ?, receiver_id = ? WHERE con_id = ?", con.Point, con.Message, con.Receiver.UserId, con.ConId)
 	if err != nil {
 		tx.Rollback()
 		log.Printf("fail: db.Query, %v\n", err)
